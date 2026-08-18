@@ -16,8 +16,12 @@ A capstone project for learning AI-assisted web development.
 3. Install dependencies and start the dev server:
 
 ```bash
+
 npm install
 npm run dev
 ```
 
 4. Open the URL shown in the terminal (usually `http://localhost:5173`).
+## Project Goal
+
+This project demonstrates how AI-assisted development can be used to plan, build, and improve a modern web application.
