@@ -22,6 +22,11 @@ npm run dev
 ```
 
 4. Open the URL shown in the terminal (usually `http://localhost:5173`).
+
 ## Project Goal
 
 This project demonstrates how AI-assisted development can be used to plan, build, and improve a modern web application.
+
+## Development
+
+This project is developed with AI-assisted tools and follows the conventions defined in `CLAUDE.md`.
