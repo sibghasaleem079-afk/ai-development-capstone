@@ -1,128 +1,128 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import './SettingsForm.css'
 
-const STORAGE_KEY = 'ai-workflow-drill-settings'
-
-const DEFAULT_SETTINGS = {
-  displayName: '',
+const INITIAL_VALUES = {
+  name: '',
   email: '',
-  theme: 'system',
-  language: 'en',
-  emailNotifications: true,
+  age: '',
 }
 
-function loadSettings() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    const settings = raw
-      ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) }
-      : { ...DEFAULT_SETTINGS }
-    applyTheme(settings.theme)
-    return settings
-  } catch {
-    return { ...DEFAULT_SETTINGS }
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const INTEGER_PATTERN = /^-?\d+$/
+
+export function validateSettings({ name, email, age }) {
+  const errors = {}
+
+  if (!name.trim()) {
+    errors.name = 'Name is required.'
   }
-}
 
-function applyTheme(theme) {
-  const root = document.documentElement
-  if (theme === 'light' || theme === 'dark') {
-    root.setAttribute('data-theme', theme)
+  if (!email.trim()) {
+    errors.email = 'Email is required.'
+  } else if (!EMAIL_PATTERN.test(email.trim())) {
+    errors.email = 'Enter a valid email address.'
+  }
+
+  const ageValue = String(age).trim()
+  if (!ageValue) {
+    errors.age = 'Age is required.'
+  } else if (!INTEGER_PATTERN.test(ageValue)) {
+    errors.age = 'Age must be a number from 13 through 100.'
   } else {
-    root.removeAttribute('data-theme')
+    const ageNumber = Number(ageValue)
+    if (ageNumber < 13 || ageNumber > 100) {
+      errors.age = 'Age must be a number from 13 through 100.'
+    }
   }
+
+  return errors
 }
 
 export default function SettingsForm() {
-  const [settings, setSettings] = useState(loadSettings)
-  const [saved, setSaved] = useState(false)
+  const [values, setValues] = useState(INITIAL_VALUES)
   const [errors, setErrors] = useState({})
-
-  useEffect(() => {
-    applyTheme(settings.theme)
-  }, [settings.theme])
+  const [submitted, setSubmitted] = useState(false)
+  const nameRef = useRef(null)
+  const emailRef = useRef(null)
+  const ageRef = useRef(null)
 
   function update(field, value) {
-    setSettings((prev) => ({ ...prev, [field]: value }))
-    setSaved(false)
+    setValues((prev) => ({ ...prev, [field]: value }))
+    setSubmitted(false)
     setErrors((prev) => {
-      if (!prev[field]) return prev
+      if (!prev[field]) {
+        return prev
+      }
       const next = { ...prev }
       delete next[field]
       return next
     })
   }
 
-  function validate(data) {
-    const next = {}
-    if (!data.displayName.trim()) {
-      next.displayName = 'Enter a display name.'
-    }
-    if (!data.email.trim()) {
-      next.email = 'Enter an email address.'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
-      next.email = 'Enter a valid email address.'
-    }
-    return next
-  }
-
   function handleSubmit(event) {
     event.preventDefault()
-    const nextErrors = validate(settings)
+    const nextErrors = validateSettings(values)
     setErrors(nextErrors)
-    if (Object.keys(nextErrors).length > 0) return
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
-    applyTheme(settings.theme)
-    setSaved(true)
-  }
+    const fieldOrder = ['name', 'email', 'age']
+    const refs = { name: nameRef, email: emailRef, age: ageRef }
+    const firstInvalid = fieldOrder.find((field) => nextErrors[field])
+    if (firstInvalid) {
+      setSubmitted(false)
+      refs[firstInvalid].current?.focus()
+      return
+    }
 
-  function handleReset() {
-    setSettings({ ...DEFAULT_SETTINGS })
-    setErrors({})
-    setSaved(false)
-    localStorage.removeItem(STORAGE_KEY)
-    applyTheme(DEFAULT_SETTINGS.theme)
+    setSubmitted(true)
   }
 
   return (
-    <form className="settings-form" onSubmit={handleSubmit} noValidate>
+    <form
+      className="settings-form"
+      onSubmit={handleSubmit}
+      noValidate
+      aria-labelledby="settings-heading"
+    >
       <header className="settings-form__header">
-        <h1>Settings</h1>
-        <p>Update your profile, appearance, and notification preferences.</p>
+        <h1 id="settings-heading">Settings</h1>
+        <p>Update your name, email, and age.</p>
       </header>
 
       <fieldset className="settings-form__section">
         <legend>Profile</legend>
 
-        <label className="settings-field" htmlFor="displayName">
-          Display name
+        <div className="settings-field">
+          <label htmlFor="name">Name</label>
           <input
-            id="displayName"
-            name="displayName"
+            ref={nameRef}
+            id="name"
+            name="name"
             type="text"
             autoComplete="name"
-            value={settings.displayName}
-            onChange={(e) => update('displayName', e.target.value)}
-            aria-invalid={Boolean(errors.displayName)}
-            aria-describedby={errors.displayName ? 'displayName-error' : undefined}
+            value={values.name}
+            onChange={(e) => update('name', e.target.value)}
+            aria-required="true"
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? 'name-error' : undefined}
           />
-          {errors.displayName ? (
-            <span id="displayName-error" className="settings-field__error" role="alert">
-              {errors.displayName}
+          {errors.name ? (
+            <span id="name-error" className="settings-field__error" role="alert">
+              {errors.name}
             </span>
           ) : null}
-        </label>
+        </div>
 
-        <label className="settings-field" htmlFor="email">
-          Email
+        <div className="settings-field">
+          <label htmlFor="email">Email</label>
           <input
+            ref={emailRef}
             id="email"
             name="email"
             type="email"
             autoComplete="email"
-            value={settings.email}
+            value={values.email}
             onChange={(e) => update('email', e.target.value)}
+            aria-required="true"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? 'email-error' : undefined}
           />
@@ -131,72 +131,38 @@ export default function SettingsForm() {
               {errors.email}
             </span>
           ) : null}
-        </label>
-      </fieldset>
+        </div>
 
-      <fieldset className="settings-form__section">
-        <legend>Appearance</legend>
-
-        <label className="settings-field" htmlFor="theme">
-          Theme
-          <select
-            id="theme"
-            name="theme"
-            value={settings.theme}
-            onChange={(e) => update('theme', e.target.value)}
-          >
-            <option value="system">System</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-          </select>
-        </label>
-
-        <label className="settings-field" htmlFor="language">
-          Language
-          <select
-            id="language"
-            name="language"
-            value={settings.language}
-            onChange={(e) => update('language', e.target.value)}
-          >
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-            <option value="fr">French</option>
-            <option value="de">German</option>
-          </select>
-        </label>
-      </fieldset>
-
-      <fieldset className="settings-form__section">
-        <legend>Notifications</legend>
-
-        <label className="settings-toggle" htmlFor="emailNotifications">
+        <div className="settings-field">
+          <label htmlFor="age">Age</label>
           <input
-            id="emailNotifications"
-            name="emailNotifications"
-            type="checkbox"
-            checked={settings.emailNotifications}
-            onChange={(e) => update('emailNotifications', e.target.checked)}
+            ref={ageRef}
+            id="age"
+            name="age"
+            type="text"
+            inputMode="numeric"
+            autoComplete="off"
+            value={values.age}
+            onChange={(e) => update('age', e.target.value)}
+            aria-required="true"
+            aria-invalid={Boolean(errors.age)}
+            aria-describedby={errors.age ? 'age-error' : undefined}
           />
-          <span>
-            Email notifications
-            <small>Receive product updates and account alerts by email.</small>
-          </span>
-        </label>
+          {errors.age ? (
+            <span id="age-error" className="settings-field__error" role="alert">
+              {errors.age}
+            </span>
+          ) : null}
+        </div>
       </fieldset>
 
       <div className="settings-form__actions">
         <button type="submit" className="settings-btn settings-btn--primary">
           Save changes
         </button>
-        <button type="button" className="settings-btn" onClick={handleReset}>
-          Reset
-        </button>
-        {saved ? (
-          <p className="settings-form__status" role="status">
-            Settings saved.
-          </p>
-        ) : null}
+        <p className="settings-form__status" role="status" aria-live="polite">
+          {submitted ? 'Settings saved successfully.' : ''}
+        </p>
       </div>
     </form>
   )
