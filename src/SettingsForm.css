@@ -1,0 +1,142 @@
+.settings-form {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 32px 64px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.settings-form__header {
+  margin-bottom: 32px;
+}
+
+.settings-form__header h1 {
+  margin: 0 0 8px;
+  font-size: 40px;
+}
+
+.settings-form__header p {
+  color: var(--text);
+}
+
+.settings-form__section {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 20px 8px;
+  margin: 0 0 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.settings-form__section legend {
+  padding: 0 8px;
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.settings-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: var(--text-h);
+  font-size: 15px;
+}
+
+.settings-field input,
+.settings-field select {
+  font: inherit;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.settings-field input:focus-visible,
+.settings-field select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.settings-field input[aria-invalid='true'] {
+  border-color: #dc2626;
+}
+
+.settings-field__error {
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.settings-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: var(--text-h);
+}
+
+.settings-toggle input {
+  margin-top: 4px;
+  accent-color: var(--accent);
+}
+
+.settings-toggle small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.settings-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.settings-btn {
+  font: inherit;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: var(--text-h);
+  background: var(--social-bg);
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  border-color: var(--border);
+}
+
+.settings-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.settings-btn--primary {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.settings-btn--primary:hover {
+  border-color: var(--accent-border);
+}
+
+.settings-form__status {
+  color: var(--accent);
+  font-size: 15px;
+}
+
+@media (max-width: 1024px) {
+  .settings-form {
+    padding: 32px 20px 48px;
+  }
+
+  .settings-form__header h1 {
+    font-size: 32px;
+  }
+}
