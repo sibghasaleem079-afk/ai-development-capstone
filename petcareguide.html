@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Care Guide — Case Study — Sibgha</title>
+<meta name="description" content="A Java desktop application built to bring basic pet care information into one simple place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html#top" class="brand">Sibgha<span>.</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#ai-usage">AI Usage</a></li>
+        <li><a href="index.html#before-after">Before / After</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<main>
+  <div class="cs-hero blueprint-bg">
+    <div class="wrap">
+      <a href="index.html#projects" class="cs-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All projects
+      </a>
+      <h1 class="cs-title">Pet Care Guide</h1>
+      <p class="cs-tagline">A Java desktop application built during my second semester, to bring basic pet care information into one simple place.</p>
+      <div class="cs-meta">
+        <span class="status-tag status-complete">Complete — within its original scope</span>
+      </div>
+      <div class="tech-tags" style="margin-top: 18px;">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">OOP</span>
+        <span class="tech-tag">Swing</span>
+        <span class="tech-tag">AWT</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-block reveal">
+      <span class="cs-block-label">01 · The Problem</span>
+      <p>I have a cat, and my friends have pets too. Whenever something came up — a health issue, a grooming question, or just wanting to keep a routine — I'd end up searching Google, asking GPT, or checking a few different websites to piece together an answer. The information was always scattered.</p>
+      <p>I also had no simple way to track how much I was spending on my pet each month.</p>
+      <p>I wanted one application that brought the basics together: routines, health tips, grooming guidance, and expense tracking, all in one place.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">02 · What I Did</span>
+      <p>This was my final project for second semester, so I built it using the Java, OOP, and GUI knowledge I had at that point — Java Swing and AWT for the interface, and core OOP concepts (inheritance, encapsulation, polymorphism) to organize the code.</p>
+      <h3>How it works</h3>
+      <p>The user starts at a welcome screen, then selects their pet type — cat, dog, or bird. Based on that choice, they get access to four features:</p>
+      <ul>
+        <li><strong>Routine Guide</strong> — basic guidance for morning, evening, and night routines (feeding, playing, and other daily activities).</li>
+        <li><strong>Healthy Tips</strong> — the user picks a common health problem (like fever) and gets information on it, including when to consider seeing a vet.</li>
+        <li><strong>Grooming Information</strong> — covers activities like bathing, nail trimming, and brushing, with guidance on how often to do them.</li>
+        <li><strong>Expense Tracker</strong> — lets the user log expenses month by month, January through December, and calculates the yearly total.</li>
+      </ul>
+      <h3>Some decisions I made along the way</h3>
+      <ul>
+        <li>I kept the scope to three pet types (cat, dog, bird) instead of trying to cover everything, since this needed to be realistic for where I was as a second-semester student.</li>
+        <li>I structured the app around a set of connected frames (PetCareFrame, WelcomeFrame, MainOptionFrame, ExpandFrame, RoutineFrame, and pet-type classes), so the user could move between the welcome screen, the main options, and each feature, and back again.</li>
+        <li>For the Expense Tracker, I used a <code>HashMap&lt;String, Double&gt;</code> with the month as the key and the expense amount as the value. Entering an amount calls <code>expenses.put(month, amount)</code> — so if you enter a new amount for a month you've already filled in, it replaces the old one rather than adding to it. To get the yearly total, <code>showTotal()</code> loops through <code>expenses.values()</code> and sums them up.</li>
+        <li>The Routine Guide, Healthy Tips, and Grooming Information content is static — written directly into the application rather than pulled from a database. That was a deliberate scope decision, not an oversight: I wanted to focus on getting the structure and flow of the app right first.</li>
+      </ul>
+      <p>Along the way, I had to learn some GUI concepts I hadn't used before, like building dropdown-style selections and wiring buttons to the right screens and functionality.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">03 · What Came of It</span>
+      <p>I ended up with a complete, working desktop application — not a prototype. The full flow works: pick a pet, move through the four features, and go back to the main menu. The code is on my GitHub.</p>
+      <p>For a second-semester project, I think it does what I set out to do: take a problem I actually had, and turn it into something usable that ties several small but genuinely helpful pieces of pet care information together in one app.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">04 · How I Used AI</span>
+      <p>I used ChatGPT as a coding and testing assistant, not as a source of the idea or the product decisions.</p>
+      <p>The problem I was solving, the features I chose, the pet types I picked, and the overall layout and user flow — all of that came from me. Where AI came in was when I hit coding problems: debugging errors, understanding why something wasn't working, and getting help implementing GUI concepts I was still learning, like the dropdown selections.</p>
+      <p>Looking back, ChatGPT was a support tool for getting unstuck technically, while the direction of the project stayed mine.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">05 · Current Functionality, Limitations &amp; What's Next</span>
+      <div class="status-split">
+        <div class="status-box working">
+          <h4>Working now</h4>
+          <ul>
+            <li>The full user flow, from pet selection through all four features and back</li>
+            <li>Routine, health, and grooming guidance for cats, dogs, and birds</li>
+            <li>Expense tracking by month, with an automatically calculated yearly total</li>
+          </ul>
+        </div>
+        <div class="status-box next">
+          <h4>Current limitations</h4>
+          <ul>
+            <li>Routine, health, and grooming content is static and built into the app — no database, so nothing can be updated without changing the code</li>
+            <li>Only three pet types are supported, with no breed-specific information yet</li>
+            <li>The Expense Tracker only holds data in memory while the app is running (in a HashMap) — no file or database storage, so entered expenses are lost when the app closes</li>
+            <li>No user accounts and no online or web access — it's a Java Swing desktop app</li>
+          </ul>
+        </div>
+      </div>
+      <h3>What I'd want to add, roughly in this order</h3>
+      <ol>
+        <li>More pet types and breed-specific information.</li>
+        <li>More depth in the health, grooming, and routine content — more conditions, more detailed guidance.</li>
+        <li>Persistent data storage, so expenses and other data aren't lost when the app closes.</li>
+        <li>General UX improvements as I learn more.</li>
+        <li>Eventually, rebuild it as a web application with a proper frontend, backend, and database.</li>
+      </ol>
+      <div class="callout">
+        <p>Pet Care Guide is where I started applying this way of working: notice a real problem, decide what would actually help, and build it with the skills I have at the time rather than waiting until I know everything. My projects have gotten more advanced since, but this is where that approach started.</p>
+      </div>
+    </div>
+    <div class="cs-nav-footer">
+      <a href="index.html#projects" class="btn btn-ghost">← Back to projects</a>
+      <a href="studentstay.html" class="btn btn-ghost">StudentStay case study →</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="footer-note">Sibgha — Junior Developer</span>
+    <span class="footer-note">Built with HTML, CSS &amp; JavaScript</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

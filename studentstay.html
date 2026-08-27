@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentStay — Case Study — Sibgha</title>
+<meta name="description" content="An early-stage prototype for helping students find accommodation near their university.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html#top" class="brand">Sibgha<span>.</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#ai-usage">AI Usage</a></li>
+        <li><a href="index.html#before-after">Before / After</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+<main>
+  <div class="cs-hero blueprint-bg">
+    <div class="wrap">
+      <a href="index.html#projects" class="cs-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        All projects
+      </a>
+      <h1 class="cs-title">StudentStay</h1>
+      <p class="cs-tagline">An early-stage prototype for helping students find accommodation near their university.</p>
+      <div class="cs-meta">
+        <span class="status-tag status-progress">Work in progress — early prototype, built over 2–3 days, running locally</span>
+      </div>
+      <div class="tech-tags" style="margin-top: 18px;">
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">React Router</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+    <div class="cs-block reveal">
+      <span class="cs-block-label">01 · The Problem</span>
+      <p>I started StudentStay after noticing a real problem among my friends who moved from other cities to Sahiwal for university. Some of them were staying in university hostels and dealing with issues like hygiene and room availability. Finding a place outside the university wasn't much easier — students and their parents had to weigh distance from the university, rent, accommodation type, and security, often searching in several different places to piece it all together.</p>
+      <p>Security stood out as a bigger concern than I expected, especially for girls. Parents want to know where their daughter will be staying and whether the area is suitable. There wasn't one place where students could bring all these factors together and compare options.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">02 · What I Did</span>
+      <h3>Who it's for</h3>
+      <p>Students moving to a new city for university. I'm starting with Sahiwal specifically, so I can build and test around one city before expanding to others.</p>
+      <h3>The core flow</h3>
+      <p>A student selects their city, university, and preferred accommodation type (hostel, apartment, shared room). StudentStay filters available options based on those choices, with the nearest options to the university shown first, since distance is a major factor. From there, a student can open a property's details to see the available information.</p>
+
+      <h3>A decision I changed my mind on</h3>
+      <p>I originally planned to include online booking. As I thought it through, I realized booking directly through the platform probably wasn't practical or trusted in the context I'm building for — people generally want to see a place in person before committing, and I don't think an online booking flow would change that. So I removed it. StudentStay is meant to help students discover and compare places and check details, not replace the step of actually visiting before deciding.</p>
+
+      <h3>On security specifically</h3>
+      <p>This was one of the main reasons I wanted to build StudentStay, but I haven't built anything yet that verifies whether a property or area is actually safe. I didn't want to label a property "safe" or "verified" without a real way to back that up. My current plan is to add student reviews, so future students can hear directly from people who've stayed at a property. Even with reviews, the idea is to give students better information to work with when they go visit and judge a place themselves — not to replace that visit.</p>
+    </div>
+
+    <div class="cs-block reveal">
+      <span class="cs-block-label">03 · What Came of It</span>
+      <p>Right now, the working parts are:</p>
+      <ul>
+        <li>Selecting a city, university, and accommodation type</li>
+        <li>Filtering search results based on those choices</li>
+        <li>A details view for each property, opened via a Details button</li>
+        <li>A mostly complete first page and UI/UX</li>
+      </ul>
+      <p>This is all running on sample data — a small set of test properties I added to check that the filtering behaves as expected (e.g., that selecting a specific city and accommodation type returns the right results). There's no backend or database yet, and it's not deployed anywhere; it runs locally on my machine.</p>
+    </div>
+
+    <div class="cs-block reveal">
+      <span class="cs-block-label">04 · How I Used AI in My Process</span>
+      <p>The problem, the core idea, and the main features are mine — I already had a clear picture of what I wanted students to be able to do before I started building. Where I used AI was mostly in implementation:</p>
+      <ul>
+        <li>Writing and modifying React/JavaScript code, and structuring components</li>
+        <li>Getting UI/UX layout ideas, which I then reviewed and adjusted myself based on what actually fit what I wanted</li>
+        <li>Debugging — when the filtering logic didn't return the results I expected from my sample data, I used AI to help track down the issue</li>
+        <li>General back-and-forth: if something wasn't quite right, I'd describe what I wanted changed or added</li>
+      </ul>
+      <p>So AI has functioned as a coding, design, and testing assistant throughout. The decisions about what to build and why were made by me.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">What's Still Uncertain</span>
+      <p>The hardest part hasn't been technical — the core features are fairly clear to me at this point. The bigger open question is how property information gets managed. If I research and add properties myself, I need to gather reliable details on each one — location, rent, type, and so on — while being careful not to make unsupported claims, especially around safety. The alternative is letting property owners add their own listings, but I'm not sure yet whether owners in the areas I'm targeting would actually use an online system for that. This is as much a real-world, operational question as it is a product one, and I expect it to get clearer as I keep building and testing.</p>
+    </div>
+    <div class="cs-block reveal">
+      <span class="cs-block-label">05 · Currently Built vs. What's Next</span>
+      <div class="status-split">
+        <div class="status-box working">
+          <h4>Currently built</h4>
+          <ul>
+            <li>City, university, and accommodation type selection</li>
+            <li>Filtering based on those choices</li>
+            <li>Property details view</li>
+            <li>Mostly complete first page and UI/UX</li>
+            <li>Sample data only, running locally — no backend, no deployment</li>
+          </ul>
+        </div>
+        <div class="status-box next">
+          <h4>What's next</h4>
+          <ul>
+            <li>Add more realistic sample properties to stress-test search and filtering</li>
+            <li>Build the student review feature</li>
+            <li>Continue refining the UI and remaining pages</li>
+            <li>Decide on the property-management approach (self-researched listings vs. owner-submitted)</li>
+            <li>Add a backend and database for storing properties and reviews</li>
+            <li>Longer term, if the project develops well, expand beyond Sahiwal to other cities and universities in Pakistan</li>
+          </ul>
+        </div>
+      </div>
+      <p>I'm building this step by step rather than rushing toward a finished version, and I expect some of these decisions to shift as I learn more.</p>
+    </div>
+    <div class="cs-nav-footer">
+      <a href="index.html#projects" class="btn btn-ghost">← Back to projects</a>
+      <a href="petcareguide.html" class="btn btn-ghost">Pet Care Guide case study →</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="footer-note">Sibgha — Junior Developer</span>
+    <span class="footer-note">Built with HTML, CSS &amp; JavaScript</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
